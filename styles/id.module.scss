@@ -1,0 +1,137 @@
+
+.container {
+  //background-image: ;
+  background-repeat: repeat-y;
+  background-size: cover;
+  //height: 100vh;
+}
+
+
+.screen {
+  height: 100vh;
+  overflow: hidden;
+
+  .select {
+    margin-left: 10px;
+    margin-top: 20px;
+  }
+
+  .wordTitle {
+    display: flex;
+
+    .titleImage {
+
+
+    }
+
+    .wordSelect {
+      .word1 {
+        width: 134px;
+        height: 75px;
+        .text {
+
+          font-family: pix, sans-serif;
+          color: #fc95c3;
+          font-weight: 900;
+          font-size: 2rem;
+          transform: translateX(30px) translateY(-60px);
+          letter-spacing: 10px;
+        }
+      }
+
+      .word2 {
+        margin-top: 10px;
+        width: 134px;
+        height: 75px;
+        .text {
+          font-family: pix, sans-serif;
+          color: #4227e8;
+          font-weight: 900;
+          font-size: 2rem;
+          transform: translateX(30px) translateY(-60px);
+          letter-spacing: 10px;
+        }
+      }
+
+      .text {
+
+      }
+    }
+
+  }
+
+  .words {
+    margin-top: 20px;
+
+
+    .wordList {
+      font-family: pix, serif;
+      white-space: nowrap;
+      height: 45px;
+      width: calc(100%);
+      overflow-y: hidden;
+      color: #ACACAC;
+
+      &::-webkit-scrollbar {
+        width: 0 !important;
+      }
+
+      .word1 {
+        font-weight: bold;
+        font-size: 18px;
+        color: #fc95c5;
+        width: 134px;
+        height: 75px;
+      }
+
+      .wordNormal {
+        width: 36px;
+        height: 19px;
+        line-height: 35px;
+      }
+
+      .word2 {
+        font-weight: bold;
+        font-size: 20px;
+        color: #4127e8;
+
+      }
+    }
+  }
+
+  .launch {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+
+    .pushable {
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 3px;
+      outline-offset: 4px;
+    }
+
+    .front {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 249px;
+      height: 55px;
+      border-radius: 3px;
+      font-size: 1.25rem;
+      -webkit-tap-highlight-color: transparent;
+      color: #000000;
+      transform: translateY(-6px);
+      font-family: pix, serif;
+
+      &:focus-visible {
+        outline: transparent;
+      }
+    }
+
+    .pushable:active .front {
+      transform: translateY(-2px);
+    }
+  }
+}
