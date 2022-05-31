@@ -25,16 +25,20 @@
     }
 
     .wordSelect {
+      .tip{
+        position: absolute;
+        transform: translateX(30%);
+      }
       .word1 {
         width: 134px;
         height: 75px;
         .text {
-
+          white-space: nowrap;
           font-family: pix, sans-serif;
           color: #fc95c3;
           font-weight: 900;
           font-size: 2rem;
-          transform: translateX(30px) translateY(-60px);
+          transform: translateX(30px) translateY(-53px);
           letter-spacing: 10px;
         }
       }
@@ -48,8 +52,10 @@
           color: #4227e8;
           font-weight: 900;
           font-size: 2rem;
-          transform: translateX(30px) translateY(-60px);
+          transform: translateX(30px) translateY(-53px);
           letter-spacing: 10px;
+          white-space: nowrap;
+
         }
       }
 

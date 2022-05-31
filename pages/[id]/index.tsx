@@ -9,27 +9,26 @@ import {LCInitState, UserStatus} from "../../components/state";
 import Screen from "../../components/Screen";
 import Output from "../../components/Output";
 import {element} from "prop-types";
+import Loading from '../../components/lodading';
 
 LCInit()
 const Home: NextPage = () => {
     const router = useRouter()
     const userRFID = useRef(router.query.id as string)
     const [userState, setUserState] = useRecoilState(UserStatus)
-
     useEffect(() => {
         if (router.query.id) {
             (async () => {
                 console.log(router.query.id)
-                const s =await LCgetUserStartStatus(router.query.id as string)
+                const s = await LCgetUserStartStatus(router.query.id as string)
                 setUserState(s)
                 console.log(s)
                 if (!userState.isStart) {
-                    await LCsetUserState(s.lcID!, "isStart", true).catch(e=>e)
+                    await LCsetUserState(s.lcID!, "isStart", true).catch(e => e)
                 }
             })()
         }
     }, [router])
-
     return (
         <div className={styles.container}
              style={{backgroundImage: `url(${require("../../public/bg.png").default.src})`}}>
@@ -58,8 +57,9 @@ const PageSelector: FC<pageSelectorProp> = ({s}) => {
     } else if (s.isFinished) {
         return <Output/>
     } else {
-        return <Output/>
+        return <Loading/>
     }
+    // return <Loading/>
 
 }
 
