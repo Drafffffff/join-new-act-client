@@ -1,11 +1,11 @@
 import styles from '/styles/id.module.scss'
-import {useRecoilValue} from "recoil";
-import {UserStatus} from "./state";
-import {FC, Ref, useEffect, useRef, useState} from "react";
+import { useRecoilValue } from "recoil";
+import { UserStatus } from "./state";
+import { FC, Ref, useEffect, useRef, useState } from "react";
 import mqtt from "mqtt"
 import Image from "next/image";
-import {worditem, wordState} from '../pages/api/getwords';
-import {useRouter} from "next/router";
+import { worditem, wordState } from '../pages/api/getwords';
+import { useRouter } from "next/router";
 
 interface SelectWord {
     word1: string,
@@ -23,11 +23,15 @@ export default function Screen() {
     const userState = useRecoilValue(UserStatus)
     const [words, setWords] = useState<worditem[][]>([])
     let client = useRef<mqtt.Client | null>(null)
-    const [selectWord, setSelectWord] = useState<SelectWord>({word1: "", word2: ""})
+    const [selectWord, setSelectWord] = useState<SelectWord>({ word1: "", word2: "" })
     const [selectState, setSelectState] = useState<SelectState>(SelectState.word1)
     const handleLaunch = () => {
-        client.current?.publish("word/create", JSON.stringify({word: selectWord.word1, type: 0, id: userState.RFID}))
-        client.current?.publish("word/create", JSON.stringify({word: selectWord.word2, type: 1, id: userState.RFID}))
+        if (selectWord.word1 !== "" && selectWord.word2 !== "") {
+            client.current?.publish("word/create", JSON.stringify({ word: selectWord.word1, type: 0, id: userState.RFID }))
+            client.current?.publish("word/create", JSON.stringify({ word: selectWord.word2, type: 1, id: userState.RFID }))
+        }else{
+            alert("请选择你的生活力")
+        }
     }
     // console.log(userState)
 
@@ -124,11 +128,11 @@ export default function Screen() {
         <div className={styles.screen}>
 
             <div className={styles.select}>
-                <Image src={require("/public/screen/jrxd.png")} alt={"shenghuoli"}/>
+                <Image src={require("/public/screen/jrxd.png")} alt={"shenghuoli"} />
             </div>
             <div className={styles.wordTitle}>
                 <div className={styles.titleImage}>
-                    <Image src={require("/public/screen/jiaruxindequ.png")} alt={"shenghuoli"}/>
+                    <Image src={require("/public/screen/jiaruxindequ.png")} alt={"shenghuoli"} />
                 </div>
                 <div className={styles.wordSelect}>
                     <div className={styles.word1} onClick={() => {
@@ -138,7 +142,7 @@ export default function Screen() {
                             word2: w.word2
                         }))
                     }}>
-                        <Image1Selector state={selectState}/>
+                        <Image1Selector state={selectState} />
                         <div className={styles.text}>
                             {selectWord.word1}
                         </div>
@@ -150,7 +154,7 @@ export default function Screen() {
                             word1: w.word1
                         }))
                     }}>
-                        <Image2Selector state={selectState}/>
+                        <Image2Selector state={selectState} />
                         <div className={styles.text}>
                             {selectWord.word2}
                         </div>
@@ -179,11 +183,11 @@ export default function Screen() {
             <div className={styles.launch}>
                 <div className={styles.pushable} onClick={() => {
                     handleLaunch()
-                }} style={{backgroundImage: `url(${require("/public/screen/button-back.png").default.src})`}}>
-                  <span className={styles.front}
-                        style={{backgroundImage: `url(${require("/public/screen/button-top.png").default.src})`}}>
-                    加入
-                  </span>
+                }} style={{ backgroundImage: `url(${require("/public/screen/button-back.png").default.src})` }}>
+                    <span className={styles.front}
+                        style={{ backgroundImage: `url(${require("/public/screen/button-top.png").default.src})` }}>
+                        加入
+                    </span>
                 </div>
             </div>
         </div>
@@ -197,17 +201,17 @@ interface WordListProps {
     ref: Ref<HTMLDivElement>
 }
 
-const WordList: FC<WordListProps> = ({list, myKey, ref}) => {
+const WordList: FC<WordListProps> = ({ list, myKey, ref }) => {
     return (
         <div className={styles.wordList} key={myKey} ref={ref}>
             {list.map((e, i) => {
                 return (
                     <span key={i} className={styles.wordItem}>
-                    <span onClick={(e) => {
-                        const el = e.target as HTMLElement
-                        console.log(el.innerText!)
-                    }}>{e}</span>
-                    <span>{` / `}</span>
+                        <span onClick={(e) => {
+                            const el = e.target as HTMLElement
+                            console.log(el.innerText!)
+                        }}>{e}</span>
+                        <span>{` / `}</span>
                     </span>
                 )
             })}
@@ -225,18 +229,18 @@ interface imageSelect {
     state: SelectState
 }
 
-const Image1Selector: FC<imageSelect> = ({state}) => {
+const Image1Selector: FC<imageSelect> = ({ state }) => {
     if (state !== SelectState.word1) {
-        return <Image src={require("/public/screen/fensekuang.png")} alt={"sd"}/>
+        return <Image src={require("/public/screen/fensekuang.png")} alt={"sd"} />
     } else {
-        return <Image src={require("/public/screen/fensewenhao.png")} alt={"sd"}/>
+        return <Image src={require("/public/screen/fensewenhao.png")} alt={"sd"} />
     }
 }
 
-const Image2Selector: FC<imageSelect> = ({state}) => {
+const Image2Selector: FC<imageSelect> = ({ state }) => {
     if (state !== SelectState.word2) {
-        return <Image src={require("/public/screen/lansekuang.png")} alt={"sd"}/>
+        return <Image src={require("/public/screen/lansekuang.png")} alt={"sd"} />
     } else {
-        return <Image src={require("/public/screen/lansewenhao.png")} alt={"sd"}/>
+        return <Image src={require("/public/screen/lansewenhao.png")} alt={"sd"} />
     }
 }
