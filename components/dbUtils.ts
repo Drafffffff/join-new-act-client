@@ -3,6 +3,7 @@ import AV from "leancloud-storage"
 import {useRecoilState} from "recoil";
 import {LCInitState} from "./state";
 import exp from "constants";
+import {Output, posInfo} from "./Output";
 
 export function LCInit() {
     AV.init({
@@ -17,7 +18,7 @@ export interface UserState {
     isStart: boolean,
     isFinished: boolean,
     isMusicFinished: boolean,
-    RFID:string
+    RFID: string
 }
 
 export async function LCgetUserStartStatus(userRFID: string): Promise<UserState> {
@@ -29,12 +30,40 @@ export async function LCgetUserStartStatus(userRFID: string): Promise<UserState>
         isStart: query!.get("isStart"),
         isFinished: query!.get("isFinished"),
         isMusicFinished: query!.get("isMusicFinished"),
-        RFID:query!.get("RFID")
+        RFID: query!.get("RFID")
     }
     return userState
 }
 
-export function LCsetSelectWord(userRFID: string,word1:string,word2:string) {
+export async function LCgetOutput(RFID: string) {
+    const output = new AV.Query("generate")
+    output.equalTo("RFID", RFID)
+    const d = await output.first()
+    const tmp = JSON.parse(d!.get("posData")) as number[][]
+    const posItems = tmp.map((e,i)=>{
+        return {
+            posID:e[0],
+            time:e[1],
+            isArea:!!e[2]
+        } as posInfo
+    })
+
+    const data: Output = {
+        userType: d!.get("userType"),
+        nickName: d!.get("nickName"),
+        posData: posItems,
+        userText: d!.get("userText"),
+        v1: d!.get("v1"),
+        v2: d!.get("v2"),
+        v3: d!.get("v3"),
+        word1: d!.get("word1"),
+        word2: d!.get("word2"),
+    }
+    return data
+}
+
+
+export function LCsetSelectWord(userRFID: string, word1: string, word2: string) {
     const obj = AV.Object.extend('word_record');
     const r = new obj()
 
@@ -58,7 +87,7 @@ export async function LCsetUserState(id: string, stateName: string, state: boole
 }
 
 
-export function map(n:number, start1:number, stop1:number, start2:number, stop2:number, withinBounds?:boolean) {
+export function map(n: number, start1: number, stop1: number, start2: number, stop2: number, withinBounds?: boolean) {
     const newVal = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
     if (!withinBounds) {
         return newVal;
@@ -71,6 +100,9 @@ export function map(n:number, start1:number, stop1:number, start2:number, stop2:
 };
 
 
-export function constrain(n:number, low:number, high:number) {
+export function constrain(n: number, low: number, high: number) {
     return Math.max(Math.min(n, high), low);
 };
+
+
+

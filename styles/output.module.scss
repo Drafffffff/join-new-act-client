@@ -1,0 +1,169 @@
+.output {
+  min-height: 100vh;
+  padding: 20px;
+  max-width: 800px;
+
+  .iconBar {
+    display: flex;
+    justify-content: space-between;
+
+    .uid {
+      font-weight: lighter;
+      letter-spacing: 2px;
+      align-items: flex-end;
+    }
+  }
+
+  .nickName {
+    margin-top: 20px;
+    text-align: center;
+    font-family: pix, serif;
+    white-space: nowrap;
+
+    .line1 {
+      font-size: 1.5rem;
+    }
+
+    .mainNickName {
+      font-size: 2rem;
+      line-height: 3.5rem;
+    }
+
+    .line3 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
+
+  .routeMap {
+    margin-top: 20px;
+    //height: 700px;
+    //background-color: rgba(35, 105, 250, 0.46);
+  }
+
+  .music {
+    .musicinfo {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .musicArea {
+      width: 326px;
+      height: 100px;
+      margin: auto;
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+
+  .vChart {
+
+    .title {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    margin-top: 10px;
+    font-size: 10px;
+
+    .titleContainer {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      text-align: center;
+      transform: translateY(-25%);
+
+      .titleword {
+        font-family: pix, serif;
+        font-size: 2rem;
+      }
+    }
+
+    .l {
+
+    }
+
+    .middleBar {
+      background-color: #52fe52;
+      flex: 1;
+      margin: 0px 5px;
+
+      .barContainer {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        transform: translateY(-8px);
+        display: flex;
+        //justify-content: center;
+        .barl {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+
+        .barr {
+          flex: 1;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+        .bar {
+          width: 100px;
+          height: 4px;
+          background-color: #0048FF;
+        }
+      }
+    }
+
+    .r {
+
+    }
+
+    .culture {
+      margin: 40px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .story {
+      margin: 40px 0;
+
+      display: flex;
+      justify-content: space-between;
+
+    }
+
+    .think {
+      margin: 40px 0;
+
+      display: flex;
+
+      justify-content: space-between;
+    }
+
+
+  }
+
+  .text {
+    margin-top: 30px;
+    font-size: 14px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+
+  .message {
+    margin-top: 20px;
+    position: absolute;
+    left: 0;
+  }
+
+  .contact {
+    text-align: center;
+    margin-top: 200px;
+  }
+}

@@ -53,9 +53,10 @@ interface pageSelectorProp {
 
 const PageSelector: FC<pageSelectorProp> = ({s}) => {
     if (s.lcID) {
+        if(s.isFinished){
+            return <Output/>
+        }
         return <Screen/>
-    } else if (s.isFinished) {
-        return <Output/>
     } else {
         return <Loading/>
     }
