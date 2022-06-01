@@ -62,11 +62,11 @@ export default function Screen() {
             clean: true,
             clientId: new Date().toString(),
             username: "admin",
-            password: "public",
+            password: "admin",
             reconnectPeriod: 1000,
             connectTimeout: 30 * 1000,
         };
-        client.current = mqtt.connect("ws://zstu-interaction.art:8083/mqtt", options);
+        client.current = mqtt.connect("wss://w2c1cee3.cn-hangzhou.emqx.cloud:8084/mqtt", options);
         client.current.on("error", error => {
             console.log("连接失败:", error);
         });
